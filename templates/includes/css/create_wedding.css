@@ -1,0 +1,215 @@
+h1.header{ /*Booking Header*/
+	text-align: center;
+	color: var(--brandColor);
+	margin: 15vh 0;
+}
+
+/* Form Styling */
+form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 9rem;
+	flex-wrap: wrap;
+}
+
+/* Input Group*/
+.input-group{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 6rem 3rem;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+/* Input Group  */
+.input-group.input,.input-group.slide,.input-group.slide-reverse{
+	flex-direction: column;
+}
+.input-group {
+	flex-basis: 100%;
+}
+.input-group h3{
+	text-align: center;
+	flex-basis: 100%;
+	margin-bottom: 4rem;
+}
+
+/* For side by side layout of a Input Group */
+.input-group.flex-half{
+	flex-basis: 48%;
+}
+.input-group.flex-half > .input{
+	flex-grow: 0;
+}
+
+
+/* Slide & Slide-reverse Layout of the input subgroup*/
+	.slide > .input:nth-child(even){
+		align-self: start;
+	}
+	.slide > .input:nth-child(odd){
+		align-self: 4rem;
+	}
+	.slide-reverse > .input:nth-child(even){
+		align-self: end;
+	}
+	.slide-reverse > .input:nth-child(odd){
+		align-self: -4rem;
+	}
+
+/* Input subgroup */
+.input-group .input{
+	position: relative;
+	margin: 2rem 2rem 0;
+}
+/* Input subgroup sizing templates */
+.input.size-normal{
+	width: 20rem;
+}
+.input.size-normal{
+	width: 36rem;
+}
+.input.size-large{
+	width: 65rem;
+}
+
+/* Input sub group content(label, input, icon) */
+/* Label*/
+.input:not(.option) label{
+	font-size: var(--p-fontsize);
+	font-family: bodyFont;
+/*	border: 0.08rem solid var(--textFontColor);*/
+	text-align: center;
+	width: 22rem;
+	border-radius: 2rem;
+	padding: 0.5rem 2rem;
+	position: absolute;
+	left: 50%;
+	top: 60.8%;
+	transform: translate(-50%);
+	background-color: var(--textBGColor);
+}
+
+label[for=theme_color]{
+	width: 50rem;
+	margin-top: 2rem;
+	text-align: center;
+}
+label[for=wedding_date]{
+	width: 20rem;
+	text-align: center;
+}
+
+option *{
+	font-size: var(--h3-fontSize);
+}
+/*Icon*/
+.input i{ 
+	font-size: 2.87rem;
+	position: absolute;
+	top: 10%;
+	left: 5%;
+}
+
+img.partnersIcon{
+	position: absolute;
+	width: 4rem;
+	height: 4rem;
+	top: 8%;
+	left: 5%;
+}
+
+
+.input i.fa-map-marker{top:4%}
+/* Input-subgroup input*/
+	.input input:not([type=color]):not([type=option]), select{ /* Normal input*/
+		font-family: bodyFont;
+		width: 100%;
+		padding: 1.5rem 1.4rem 1.4rem 6rem;
+		border-radius: 0.9rem;
+		margin-bottom: 4.5rem;
+		border: 0.08rem solid var(--textFontColor);
+		background-color: var(--textBGColor);
+	}
+	.input.option .option-content{
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	}
+	.input input[type=radio]{/* Radio Input */
+		color: var(--brandColor);
+		width: 3rem;
+		height: 3rem;
+		padding: 1rem;
+	}
+	.input.option img{
+		width: 20rem;
+	}
+	.input input[type=color]{/* Color Input */
+		width: 11rem;
+		border-radius: 3rem;
+		border: none;
+	}
+	
+	/* Hover/focus animation/shadow */
+	.input input:not([type=radio],[type=color]):focus{
+		outline: 0;
+		box-shadow:var(--drop-shadow);
+	}
+	/* Submit button */
+	input[type=submit]{
+		padding: 1.5rem 7rem;
+		background-color: var(--brandColor);
+		border: 0;
+		border-radius: 3rem;
+		font-size: var(--h4-fontsize);
+		margin-bottom: 5rem;
+		box-shadow: var(--drop-shadow);
+		font-family: brandFont;
+	}
+	/* Submit Group */
+
+	.button-grouped{
+		float: left;
+	}
+
+	.manage-buttons{
+		position: sticky;
+		bottom: 0;
+		display: flex;
+		justify-content: space-between;
+		padding: 0 3rem;
+	}
+	/* Textareas */
+	.input textarea{
+		width: 100%;
+		border: 1px solid var(--textFontColor);
+		height: 10rem;
+		border-radius: 2rem;
+		padding: 1rem;
+		text-align: justify;
+		font-size: 1.4rem;
+		font-family: bodyFont;
+		margin-bottom: 10rem;
+	}
+
+/* Participants/Subform header portion*/
+form h2{
+	margin: 15rem 0;
+	flex-basis: 100%;
+	text-align: center;
+}
+/* Allows multiple input layouting */
+.input-group.multi-names .input{
+	flex-basis: 40vw;
+}
+
+/* Custom style for home navigation */
+nav li.home a:hover::after{
+	width: 0%;
+}
+nav li.home a i.fa{transition: transform 0.5s;}
+nav li.home a:hover i.fa, nav li.home a:hover i.fa{
+	transform: scale(1.5);
+}

@@ -1,0 +1,257 @@
+/* MAIN CSS is for used mainly for Global Adjustments */
+/* Styles for Body, Navigation, Header, and Footer */
+:root{
+	--brandColor: #ffaa00;
+	/* Light Mode */
+		--brandColor2: #dadad8;
+		--textFontColor: black;
+		--textBGColor: white;
+		--navBg: url('../images/navBg.png');
+		--headerBg: url('../images/header.jpg');
+		--bodyBg: url('../images/bodyBG.jpg');
+		--drop-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+		--text-shadow: rgba(0, 0, 0, 0.4) 3px 3px 4px;
+
+	/* Dark mode */
+		/* --brandColor2: #2a2a2a; */
+		/* --textFontColor: white; */
+		/* --textBGColor: #1e1e1e; */
+		/* --navBg: url('../images/navBg-dark.png'); */
+		/* --headerBg: url('../images/header-dark.webp'); */
+		/* --drop-shadow: rgba(0, 0, 0, 0.4) 0px 54px 55px, rgba(0, 0, 0, 0.3) 0px -12px 30px, rgba(0, 0, 0, 0.3) 0px 4px 6px, rgba(0, 0, 0, 0.35) 0px 12px 13px, rgba(0, 0, 0, 0.2) 0px -3px 5px; */
+		/* --text-shadow: rgba(255, 174, 11, 0.4) 3px 3px 4px; */
+
+	/* Font size (Based on rem) */
+	--h1-fontsize: 10rem;
+    --h2-fontsize: 7.5rem;
+    --h3-fontsize: 4.5rem;
+	--h4-fontsize: 3rem;
+    --p-fontsize: 1.8rem;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: var(--textFontColor);
+}
+@font-face {
+	font-family: 'headFont';
+	src: url('../fonts/AlexBrush-Regular.ttf');
+}
+@font-face {
+	font-family: 'bodyFont';
+	src: url('../fonts/Maharlika-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'brandFont';
+	src: url('../fonts/MTCORSVA.TTF');
+}
+
+/* Global Font size and color */
+h1 {font-size: var(--h1-fontsize); font-family: brandFont;}
+h2 {font-size: var(--h2-fontsize); font-family: headFont; color: var(--brandColor);}
+h3 {font-size: var(--h3-fontsize); font-family: headFont; color: var(--brandColor);}
+h4 {font-size: var(--h4-fontsize); font-family: headFont;}
+p, li,input,label {font-size: var(--p-fontsize); font-family: bodyFont;}
+
+body {
+	background-color: var(--textBGColor);
+	background-image: var(--bodyBg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: right bottom;
+}
+
+/*Header portion*/
+header{
+	text-align: center;
+	background-image: var(--headerBg);
+	bacgr
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: right bottom;
+	position: relative;
+	height: 50vh;
+}
+header h1{
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%,-50%);
+	font-family: brandFont;
+	color: #ffaa00;
+	font-size: calc(var(--h1-fontsize) + 2rem);
+	line-height: var(--h1-fontsize);
+	text-shadow: var(--text-shadow);
+}
+
+
+/*Navigation portion*/
+body nav{
+/* Position to lock the navigation on scroll */
+	background-image: var(--navBg);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+	padding-bottom: 3rem;
+	background-size: contain;
+ 	position: sticky;
+ 	top: 0;
+ 	padding: 2rem 0 4rem;
+ 	z-index: 1;
+}
+
+ul.nav{
+	list-style-type: none;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+}
+.subnav{
+	margin: 2rem 0 0;
+}
+
+.nav li {
+	text-align: center;
+}
+.nav li a{
+	text-decoration: none;
+	color: var(--primaryColor);
+	font-family: 'headFont';
+	font-size: var(--h4-fontsize);
+	position: relative;
+}
+
+/* Used a line w/transition magic when hovered/navigated  */
+.nav li a::after{
+	content: '';
+	border-radius: 1rem;
+	width: 0;
+	height: 0.2rem;
+	position: absolute;
+	bottom: -0.5rem;
+	left: 50%;
+	translate: -50%;
+	background-color: var(--brandColor);
+	transform-origin: center;
+	transition: width 1s ease ;
+}
+.nav li:not(.active) a:hover::after{
+	width: 100%;
+}
+
+/* Singout align to right */
+
+.nav li#logout *{
+	color: var(--brandColor);
+}
+
+/* Active links */
+.nav li.active a::after{
+	width: 100%;
+}
+
+/* Footer */
+.themeFooter { /* Footer on wedding events */
+	width: 100%;
+	position: sticky;
+	bottom: 0;
+}
+
+footer.booknow{ /* Book now styling */
+    z-index: 2;
+    position: fixed;
+    right: 1.5rem;
+    bottom: 2rem;
+    padding: 0 2rem;
+}
+footer.booknow:hover{
+    animation: none;
+}
+footer.booknow a{
+    text-decoration: none;
+    background-color: var(--brandColor);
+    padding: 1.5rem 5rem;
+    font-size: var(--h4-fontsize);
+    border-radius: 4rem;
+    font-family: headFont;
+    font-weight: 400;
+	box-shadow: var(--drop-shadow);
+}
+footer.booknow{
+    animation: blinker-relaxed 4s infinite;
+}
+
+footer.copyright{
+	padding: 2rem 0;
+	background-color: white;
+	opacity: 0.7;
+}
+
+
+/*	Copyright*/
+.copyright {
+	text-align: center;
+	color: var(--brandColor);
+}
+
+/* Special Styles */
+	/* Lists (to avoid repetition) */
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	/* Animations */
+	@keyframes blinker{
+		15%, 85% {
+		opacity: 1;
+		}
+		50% {
+		opacity: 0;
+		}
+	}
+
+	@keyframes blinker-relaxed{
+		40%, 80% {
+		opacity: 1;
+		}
+		60% {
+		opacity: 0;
+		}
+	}
+
+	/* Button links scale on hover*/
+	.button-hover:hover{
+		transform-origin: center;
+    	transform: scale(105%);
+	}
+
+	/* Shadows */
+	.drop-shadow {
+		box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+	}
+
+
+
+/* General Responsiveness Adjustments */
+@media (max-width: 600px){
+	/* Mobile */
+	html {font-size: 1.6vw;	} /*We set font to html, because we used rem*/
+	header {height: 30vh;}
+	section.main{margin: 20w 0 100vw;}
+}
+  
+  @media (min-width: 601px) and (max-width: 1024px){
+	/* Tablet */
+	html {font-size: 1.1vw;}
+	section.main{margin: 10vw 0 40vw;}
+}
+  
+  @media (min-width: 1025px){
+	/* Desktop */
+	html {font-size: 0.7vw;}
+	header {height: 70vh;}
+	section.main{margin: 5vw 0 30vw;}  
+}

@@ -1,0 +1,87 @@
+/* Employee wrapper */
+section.main {
+    display: flex;
+    flex-direction: column;
+}
+
+section.main .employee{
+    position: relative;
+    margin: 3rem;
+    width: 80vw;
+    height: 35rem;
+}
+/* Slide Design */
+section.main .employee:nth-child(even){
+    align-self: flex-end;
+}
+/* Circle background design */
+.main .employee .circle-bg{
+    background-color: var(--brandColor2);
+    border-radius: 50%;
+    width: 35rem;
+    height: 35rem;
+    position: absolute;
+    z-index: -2;
+}
+/* Employee Photo */
+.circle-bg img{
+    width: 65%;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+.circle-bg img:not(#david){ /*Custom style since Photo is taller*/
+    bottom: 5rem;
+}
+/* Employee Data */
+.employee .employee-data{
+    position: absolute;
+    top: 13rem;
+    left: 30rem;
+}
+    /* Name */
+    .employee .employee-data .employee-name{
+        color: var(--brandColor);
+        line-height: 3.5rem;
+    }
+    /* Roles */
+    .employee .employee-data ul.employee-roles{
+        padding: 1.7rem 0 0;
+        line-height: 2.2rem;
+    }
+    .employee .employee-data ul.employee-roles > * {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    /* Employee Social Links */
+    .employee .employee-data ul.employee-socialLinks {
+        display: flex;
+        margin-top: 2rem;
+    }
+    .employee .employee-data ul.employee-socialLinks li a i{
+        font-size:3rem;
+
+        padding: 0 0.5rem;
+    }
+
+
+/* Responsiveness Adjustments */
+@media (max-width: 600px){
+	/* Mobile */
+    .employee .employee-data {
+        top: 6.9rem;
+    }
+    section.main .employee:nth-child(even){
+        align-self: flex-start;
+    }
+}
+
+@media (min-width: 1025px) {
+	/* Desktop & Tablet */
+	section.main .employee {
+        width: 55vw;
+    }
+}

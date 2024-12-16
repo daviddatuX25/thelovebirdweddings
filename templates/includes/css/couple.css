@@ -1,0 +1,109 @@
+section {
+	margin: 22vw 0;
+}
+
+/*Wedding Date Section*/
+section.wedDate h2{
+	text-align: center;
+	color: var(--brandColor);
+	display: flex;
+	justify-content: space-evenly;
+	position: relative;
+}
+	.wedDate h2:before,.wedDate h2:after{
+		content: '';
+		width: 10vw;
+		border-top: 2px solid var(--brandColor);
+		height: 5px;
+		transform: translateY(4rem);
+		overflow: hidden;
+	}
+
+
+/*Couple Photo Opener(Individual photo side by side) */
+section.couple_opener{
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+}
+	/* Couple Name Opener */
+	.couple_opener h2 {
+		flex-basis: 60vw;
+	}
+	.couple_opener h2 span{
+		display: block;
+		line-height: 0.8;
+		width: 100%;
+		text-align: center;
+		color: var(--brandColor);
+	}
+	.couple_opener h2 span.bride{text-align: left;}
+	.couple_opener h2 span.groom{text-align: right;}
+	.couple_opener img{width: 25vw;}
+
+/* Theme */
+section.theme{ 
+	text-align: center;
+}
+
+/* Location & Prenup */
+section.combo{/* combo class is used for reuse */
+	display: flex;
+	flex-wrap: wrap-reverse;
+	align-items: center;
+	justify-content: center;
+}
+	.combo .combo-img{
+		width: 40vw;
+		min-width: 40rem;
+		margin: 5vw;
+		border-radius: 5rem;
+		order: 1;
+	}
+	.combo .combo-txt{
+		flex-grow: 1;
+		text-align: center;
+		order: 2;
+	}
+	.combo-reverse .combo-img{
+		order: 3;
+	}
+
+/* Participants */
+section.participants{
+	width: 100vw;
+	text-align: center;
+}
+/*Optimized for list/set of names*/
+section.participants ul.names{ 
+	list-style: none;
+	padding: 0 10vw;
+	font-family: bodyFont;
+	font-size: var(--p-fontsize);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin: 4ch 0;
+}
+section.participants ul.names li{
+	padding: 1.3ch 3ch;
+}
+
+.testimonies{
+    text-align: center;
+}
+.testimonies a {
+    color: var(--brandColor);
+	text-decoration: none;
+	animation: blinker 1s ease-in-out infinite;
+}
+
+/* Specific Media Queries */
+@media (max-width: 600px) {
+	/* Mobile-specific styles */
+	section.participants ul.names {
+		padding: 0ch;
+	}
+}

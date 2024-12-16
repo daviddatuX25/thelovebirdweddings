@@ -1,0 +1,61 @@
+
+
+
+.main { /* Adjusts the wedding events(main content) evenly*/
+    display: flex;
+    justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+
+/*--- Wedding Event Circle Style ---*/
+.main .event{ 
+    position: relative;
+    min-width: 100px;
+    width: 30rem;
+    margin: 5rem 5rem;
+    text-align: center;
+}
+/* Image Bottom  Margin Adjustment*/
+.main .event .img-container { 
+    margin: 0 0 2rem; 
+}
+/* Styling & Positioning of Overlay Image */
+.main .event .img-container::after  { 
+    content: '';
+    background-image: url('../images/couple_overlay.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 12%;
+    left: 70%;
+    transform: scale(140%) translate(-50%,0);
+    transform-origin: center;
+    width: 100%;
+    height: 20rem;
+    background-size: contain;
+    background-position: top center;
+}
+.main .event .img-container img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform-origin: center;
+    transform: scale(95%);
+}
+
+/* View event Button */
+.main .event a.button {
+	display: inline-block;
+	text-decoration: none;
+	font-family: headFont;
+	font-size: calc(var(--h4-fontsize) - 0.5rem);
+    background-color: var(--brandColor);
+	padding: 0.5rem 2rem;
+	border-radius: 2rem;
+	margin-top: 3rem;
+    box-shadow: var(--drop-shadow);
+    position: relative;
+}
+.main .event a.button:hover::after{
+    content: '';
+}
