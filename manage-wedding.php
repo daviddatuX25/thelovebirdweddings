@@ -1,11 +1,13 @@
 <?php
 include_once 'config/init.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the input values
-    $weddingKey = $_POST['wedding_key'];
-    $password = $_POST['password'];
+    $weddingKey = Sanitizer::test_input($_POST['wedding_key']);
+    $password = Sanitizer::test_input($_POST['password']);
 
     // Validate the credentials
     $weddingsDB = new Weddings();
@@ -14,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($wedding) {
         // Store wedding ID in session
         $_SESSION['wedding_id'] = $wedding->wedding_id;
-        $_SESSION['wedding_key'] = $weddingKey;
+        $_SESSION['wedding_key'] = $wedding->wedding_key;
+        $_SESSION['password'] = $wedding->password;
 
         // Redirect to manage wedding page
         header("Location: manage-wedding.php");
@@ -26,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // Clear session on direct access to the page
-    if(isset($_SESSION["wedding_id"])){
+    if(!empty($_SESSION["wedding_id"]) && !empty($_SESSION['password'])){
         header("Location: manage-weddingDetails.php");
     } else {
         endSession();

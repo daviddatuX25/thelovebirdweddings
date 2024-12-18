@@ -39,9 +39,7 @@ if (isset($_GET['sort'])){
 		?>
 		<div class="event">
 			<div class="img-container">
-				<img src="
-				<?php echo "clients/partner-" . $weddingID . "/couple.png";?>
-				" alt="couple image">
+				<img src="<?php echo $participant[0]->couple_photo;?>" alt="couple image">
 			</div>
 			<h3>
 				<?php echo $participant[0]->first_name . " x " . $participant[1]->first_name;?>

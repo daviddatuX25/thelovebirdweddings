@@ -83,15 +83,22 @@ include 'includes/manage-nav.php';
 
     <div class="input-group">
         <div class="input size-small">
+            <label for="couple_image">Couple Image</label>
+            <input type="file" name="couple_image" accept="image/*">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="input size-small">
             <label for="marriage_image">Marriage Image</label>
-            <input type="file" name="marriage_image" accept="image/jpeg">
+            <input type="file" name="marriage_image" accept="image/*">
         </div>
     </div>
 
     <div class="input-group">
         <div class="input size-small">
             <label for="prenup_image">Prenup Image</label>
-            <input type="file" name="prenup_image" accept="image/jpeg">
+            <input type="file" name="prenup_image" accept="image/*">
         </div>
     </div>
 

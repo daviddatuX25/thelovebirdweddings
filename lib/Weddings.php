@@ -53,13 +53,27 @@ class Weddings extends Database {
         $this->bind(":password", $password);
         return $this->getResult(); // Return the wedding details if found
     }
+
+    public function getWeddingByKey($weddingKey) {
+        $this->query("SELECT * FROM weddings WHERE wedding_key = :wedding_key");
+        $this->bind(":wedding_key", $weddingKey);
+        return $this->getResult() ?? NULL; // Return the wedding details if found
+    }
+
+    public function getWeddingKeyById($wedId){
+        $this->query("SELECT * FROM weddings WHERE wedding_id = :wedding_id");
+        $this->bind(":wedding_id", $wedId);
+        return $this->getResult() ?? NULL; // Return the wedding details if found
+
+    }
+    
     // Read wedding info for weddings page
     public function getAllWeddings_openersInfo($status) {
         switch ($status) {
             case 'held':
                 $this->query("
                     SELECT 
-                        role_assignments.wedding_id, participants.first_name, weddings.wedding_photo 
+                        role_assignments.wedding_id, participants.first_name, weddings.couple_photo 
                     FROM
                         ((role_assignments INNER JOIN weddings ON role_assignments.wedding_id = weddings.wedding_id) 
                         INNER JOIN roles ON role_assignments.role_id = roles.role_id) 
@@ -74,7 +88,7 @@ class Weddings extends Database {
             case 'upcomming':
                 $this->query("
                     SELECT 
-                        role_assignments.wedding_id, participants.first_name, participants.last_name, weddings.wedding_photo 
+                        role_assignments.wedding_id, participants.first_name, participants.last_name, weddings.couple_photo
                     FROM
                         ((role_assignments INNER JOIN weddings ON role_assignments.wedding_id = weddings.wedding_id) 
                         INNER JOIN roles ON role_assignments.role_id = roles.role_id) 
@@ -89,7 +103,7 @@ class Weddings extends Database {
             default:
                 $this->query("
                     SELECT 
-                        role_assignments.wedding_id, participants.first_name, participants.last_name, weddings.wedding_photo 
+                        role_assignments.wedding_id, participants.first_name, participants.last_name, weddings.couple_photo
                     FROM
                         ((role_assignments INNER JOIN weddings ON role_assignments.wedding_id = weddings.wedding_id) 
                         INNER JOIN roles ON role_assignments.role_id = roles.role_id) 

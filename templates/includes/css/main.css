@@ -137,7 +137,7 @@ ul.nav{
 	transform-origin: center;
 	transition: width 1s ease ;
 }
-.nav li:not(.active) a:hover::after{
+.nav li:not(.active,.no-magic) a:hover::after{
 	width: 100%;
 }
 
@@ -159,7 +159,7 @@ ul.nav{
 	bottom: 0;
 }
 
-footer.booknow{ /* Book now styling */
+footer.booknow, footer.fixed-button{ /* Book now styling */
     z-index: 2;
     position: fixed;
     right: 1.5rem;
@@ -169,7 +169,7 @@ footer.booknow{ /* Book now styling */
 footer.booknow:hover{
     animation: none;
 }
-footer.booknow a{
+footer.booknow a, footer.fixed-button a{
     text-decoration: none;
     background-color: var(--brandColor);
     padding: 1.5rem 5rem;

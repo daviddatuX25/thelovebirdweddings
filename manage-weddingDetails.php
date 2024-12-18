@@ -1,7 +1,15 @@
 <?php
 include_once 'config/init.php';
-session_start();
-
+// Verify session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['wedding_id']) && !isset($_SESSION['wedding_password'])) {
+    header("Location: manage-wedding.php");
+    session_unset();
+    session_destroy();
+    exit();
+}
 $weddingsDB = new Weddings();
 $themes = new Themes();
 $manageWedding_DetailsPage = new Template("templates/manage-weddingDetails_.php");
@@ -9,11 +17,7 @@ $manageWedding_DetailsPage->themes = $themes->getThemes();
 $manageWedding_DetailsPage->cssFileName = "create_wedding.css";
 $manageWedding_DetailsPage->pageTitle = "Manage Wedding Details";
 
-// Verify session
-if (!isset($_SESSION['wedding_id'])) {
-    header("Location: manage-wedding.php");
-    exit();
-}
+
 
 // Get wedding information
 $weddingInformation = $weddingsDB->getWeddingById($_SESSION['wedding_id']);
@@ -21,50 +25,72 @@ $weddingInformation = $weddingsDB->getWeddingById($_SESSION['wedding_id']);
 // Handle update wedding details
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_wedding'])) {
     $weddingData = [
-        'wedding_date' => $_POST['wedding_date'],
-        'description' => $_POST['description'],
-        'theme_id' => $_POST['theme_id'],
-        'theme_color' => $_POST['theme_color'],
-        'wedding_location' => $_POST['wedding_location'],
-        'prenup_location' => $_POST['prenup_location'],
-        'mobile_number' => $_POST['mobile_number'],
-        'email_address' => $_POST['email_address'],
+        'wedding_date' => Sanitizer::test_input($_POST['wedding_date'] ?? ''),
+        'description' => Sanitizer::test_input($_POST['description'] ?? ''),
+        'theme_id' => Sanitizer::test_input($_POST['theme_id'] ?? ''),
+        'theme_color' => Sanitizer::test_input($_POST['theme_color'] ?? ''),
+        'wedding_location' => Sanitizer::test_input($_POST['wedding_location'] ?? ''),
+        'prenup_location' => Sanitizer::test_input($_POST['prenup_location'] ?? ''),
+        'mobile_number' => Sanitizer::test_input($_POST['mobile_number'] ?? ''),
+        'email_address' => Sanitizer::validate_email($_POST['email_address'] ?? '') 
+            ? Sanitizer::test_input($_POST['email_address']) 
+            : null // Set null if email is invalid
     ];
 
     $clientFiles = 'clients/partner-'.$_SESSION['wedding_id'] . '/';
+    $coupleImgsFolder = $clientFiles . "couple_images/";
+    $marriageImgsFolder = $clientFiles . "marriage_images/";
+    $prenupImgsFolder = $clientFiles . "prenup_images/";
+    
 
     // Create directory if it doesn't exist
-    if (!is_dir($clientFiles)) {
-        mkdir($clientFiles, 0777, true);
-    }
+    if (!is_dir($clientFiles)) {mkdir($clientFiles, 0777, true);}
 
     // Initialize variables for image paths
     $marriageImagePath = null;
     $prenupImagePath = null;
+    $coupleImagePath = null;
 
-    // Handle marriage image upload
-    if (isset($_FILES['marriage_image'])) {
+
+    // Handle couple image upload
+    if (isset($_FILES['couple_image'])) {
+        if (!is_dir($coupleImgsFolder)) {mkdir($coupleImgsFolder, 0777, true);}
+        if ($_FILES['couple_image']['error'] == UPLOAD_ERR_OK) {
+            $coupleImage = $_FILES['couple_image'];
+            $coupleImagePath = $coupleImgsFolder . $coupleImage["name"];
+            if (!move_uploaded_file($coupleImage['tmp_name'], $coupleImagePath)) {
+                error_log("Failed to move uploaded file for couple image.");
+            }
+        } else {
+            error_log("Couple image upload error: " . $_FILES['couple_image']['error']);
+        }
+    }
+
+     // Handle marriage image upload
+     if (isset($_FILES['marriage_image'])) {
+        if (!is_dir($marriageImgsFolder)) {mkdir($marriageImgsFolder, 0777, true);}
         if ($_FILES['marriage_image']['error'] == UPLOAD_ERR_OK) {
             $marriageImage = $_FILES['marriage_image'];
-            $marriageImagePath = $clientFiles . "marriage.jpg";
+            $marriageImagePath = $marriageImgsFolder . $marriageImage["name"];
             if (!move_uploaded_file($marriageImage['tmp_name'], $marriageImagePath)) {
                 error_log("Failed to move uploaded file for marriage image.");
             }
         } else {
-            error_log("Marriage image upload error: " . $_FILES['marriage_image']['error']);
+            error_log("marriage image upload error: " . $_FILES['marriage_image']['error']);
         }
     }
 
     // Handle prenup image upload
     if (isset($_FILES['prenup_image'])) {
+        if (!is_dir($prenupImgsFolder)) {mkdir($prenupImgsFolder, 0777, true);}
         if ($_FILES['prenup_image']['error'] == UPLOAD_ERR_OK) {
             $prenupImage = $_FILES['prenup_image'];
-            $prenupImagePath = $clientFiles . "prenup.jpg";
+            $prenupImagePath = $prenupImgsFolder . $prenupImage["name"];
             if (!move_uploaded_file($prenupImage['tmp_name'], $prenupImagePath)) {
                 error_log("Failed to move uploaded file for prenup image.");
             }
         } else {
-            error_log("Prenup image upload error: " . $_FILES['prenup_image']['error']);
+            error_log("prenup image upload error: " . $_FILES['prenup_image']['error']);
         }
     }
 
@@ -75,9 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_wedding'])) {
     if ($prenupImagePath) {
         $weddingsDB->updateWedding($_SESSION['wedding_id'], ['prenup_photo' => $prenupImagePath]);
     }
+    if ($coupleImagePath) {
+        $weddingsDB->updateWedding($_SESSION['wedding_id'], ['couple_photo' => $coupleImagePath]);
+    }
 
     $weddingsDB->updateWedding($_SESSION['wedding_id'], $weddingData);
-
     header("Location: manage-wedding.php");
     exit();
 }

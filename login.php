@@ -20,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($wedding) {
         // Set session variables
         $_SESSION['wedding_id'] = $wedding->wedding_id;
+        $_SESSION['wedding_key'] = $wedding->wedding_key;
+        $_SESSION['password'] = $wedding->password;
         header("Location: manage-weddingDetails.php");
         exit();
     } else {

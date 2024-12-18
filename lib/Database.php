@@ -63,9 +63,16 @@ class Database{
 		return $this->statement->fetch(PDO::FETCH_OBJ);
 	}
 
-	 protected function getLastId() {
+	public function getLastId() {
         return $this->databaseHandler->lastInsertId();
     }
-}
 
+	public function runQuery($sqlCode, $params = []) {
+        $this->query($sqlCode);
+        foreach ($params as $param => $value) {
+            $this->bind($param, $value);
+        }
+        $this->execute();
+	}
+}
 ?>

@@ -4,7 +4,7 @@ include_once 'config/init.php';
 
 // Load Database
 $weddingsDB = new Weddings();
-$participants = new Participants();
+$participantsDB = new Participants();
 $themes = new Themes();
 
 
@@ -14,7 +14,7 @@ $weddingEvent = new Template("templates/wedding-event_.php");
 if (isset($_GET['wedding_id'])) {
 	// Prepare DB: wedding event information and its participants
 	$weddingEvent->weddingInformation = $weddingsDB->getWeddingById($_GET['wedding_id']);
-	$weddingEvent->weddingParticipants = $participants->getWeddingParticipants($_GET['wedding_id']);
+	$weddingEvent->weddingParticipants = $participantsDB->getWeddingParticipants($_GET['wedding_id']);
 	$weddingEvent->weddingTheme = $themes;
 	$weddingEvent->pageTitle = "View wedding event";
 	$weddingEvent->cssFileName = "couple.css";

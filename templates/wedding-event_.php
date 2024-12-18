@@ -19,13 +19,13 @@ $otherParticipantRoles = [];
 		<h2><?php echo date("F j, Y",strtotime($weddingInformation->wedding_date)); ?></h2>
 	</section>
 	<section class="couple_opener">
-		<img src="clients/<?php echo $partners["Bride"]->photo;?>" alt="Bride">
+		<img src="<?php echo $partners["Bride"]->photo;?>" alt="Bride">
 		<h2>
 			<span class="bride"><?php echo $partners["Bride"]->first_name;?></span>
 				<span> & </span> 
 				<span class="groom"><?php echo $partners["Groom"]->first_name;?></span>
 		</h2>
-		<img src="clients/<?php echo $partners["Groom"]->photo;?>" alt="Groom">
+		<img src="<?php echo $partners["Groom"]->photo;?>" alt="Groom">
 	</section>
 	<section class="theme">
 		<h2>Theme</h2>
@@ -33,14 +33,14 @@ $otherParticipantRoles = [];
 	</section>
 	<div>
 		<section class="location combo">
-			<img class="combo-img" src="clients/partner-<?php echo $weddingInformation->wedding_id;?>/marriage.jpg" alt="resort">
+			<img class="combo-img" src="<?php echo $weddingInformation->wedding_photo?>" alt="wedding location">
 			<div class="combo-txt">
 				<h2>Location</h2>
 				<p><?php echo $weddingInformation->wedding_location;?></p>  
 			</div>
 		</section>
 		<section class="prenup combo combo-reverse">
-			<img class="combo-img" src="clients/partner-<?php echo $weddingInformation->wedding_id;?>/prenup.jpg" alt="prenup location">
+			<img class="combo-img" src="<?php echo $weddingInformation->prenup_photo?>" alt="prenup location">
 			<div class="combo-txt">
 				<h2>Prenup</h2>
 				<p><?php echo $weddingInformation->prenup_location;?></p>

@@ -10,46 +10,46 @@ include 'includes/header.php';?>
 			<h3>Bride's Name</h3>
 			<div class="input size-normal"> <!-- Input subgroup-->
 				<label for="firstName">First Name</label>
-				<input type="text" name="bride_firstName">
+				<input type="text" name="bride_firstName" required>
 				<img class="partnersIcon" src="templates/includes/images/bride.png">
 			</div>
 			<div class="input size-normal"> <!-- Input subgroup-->
 				<label for="lastName">Last Name</label>
-				<input  type="text" name="bride_lastName">
+				<input  type="text" name="bride_lastName" required>
 			</div>
 		</div>
 		<!-- Groom -->
 		<div class="input-group flex-half slide-reverse">
 			<h3>Groom's Name</h3>
 			<div class="input size-normal">
-				<label for="firstName">First Name</label>
-				<input type="text" name="groom_firstName">
+				<label for="firstName">First Name(*)</label>
+				<input type="text" name="groom_firstName" required>
 				<img class="partnersIcon" src="templates/includes/images/groom.png">
 			</div>
 			<div class="input size-normal">
-				<label for="lastName">Last Name</label>
-				<input type="text" name="groom_lastName">
+				<label for="lastName">Last Name(*)</label>
+				<input type="text" name="groom_lastName" required>
 			</div>
 		</div>
 		<!-- Contact -->
 		<div class="input-group">
 			<h3>Contact</h3>
 			<div class="input size-normal">
+				<label for="mobileNumber">Mobile no.(*)</label>
+				<input type="number" name="mobileNumber" required>
+				<i class="fa fa-phone" aria-hidden="true"></i>
+			</div>
+			<div class="input size-normal">
 				<label for="emailAddress">Email Address</label>
 				<input type="email" name="emailAddress">
 				<i class="fa fa-envelope" aria-hidden="true"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="mobileNumber">Mobile no.</label>
-				<input type="number" name="mobileNumber">
-				<i class="fa fa-phone" aria-hidden="true"></i>
 			</div>
 		</div>
 		<!-- Theme -->
 		<div class="input-group">
 			<h3>Theme</h3>
 			<?php foreach($themes as $theme):?>
-			<div class="input option">
+			<div class="input option button-hover" for="theme_id">
 				<img src="templates/includes/images/themes/<?php echo $theme->theme_name;?>/icon.png" alt="select theme">
 				<div class="option-content">
 					<input type="radio" name="theme_id" value="<?php echo $theme->theme_id;?>">
@@ -104,261 +104,15 @@ include 'includes/header.php';?>
 		<div class="input-group">
 			<h3>Wedding Credentials</h3>
 			<div class="input size-normal">
-				<label for="weddingKey">Wedding key</label>
-				<input id="weddingKey" type="text" name="weddingKey">
+				<label for="weddingKey">Wedding key(*)</label>
+				<input id="weddingKey" type="text" name="weddingKey" required>
 				<i class="fa-solid fa-key"></i>
 			</div>
 			<div class="input size-normal">
-				<label for="password">Password</label>
-				<input id="password" type="password" name="password">
+				<label for="password">Password(*)</label>
+				<input id="password" type="password" name="password" required>
 			</div>
 		</div> 
-
-	<!-- <div class="participants">
-		<h2>Participants</h2>
-
-
-		<div class="input-group">
-			<h3>Maid of Honor</h3>
-			<div class="input size-normal">
-				<label for="maidOfHonor-fn">First name</label>
-				<input type="text" name="maidOfHonor-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="maidOfHonor-ln">Last name</label>
-				<input type="text" name="maidOfHonor-ln">
-			</div>
-		</div>
-
-
-		<div class="input-group">
-			<h3>Best Man</h3>
-			<div class="input size-normal">
-				<label for="bestMan-fn">First name</label>
-				<input type="text" name="bestMan-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="bestMan-ln">Last name</label>
-				<input type="text" name="bestMan-ln">
-			</div>
-		</div>
-
-
-		<div class="input-group" id="maidOfHonor">
-	        <h3>Maid of Honor</h3>
-	        <div class="input size-normal">
-	            <label for="maidOfHonor-fn">First name</label>
-	            <input type="text" name="maidOfHonor-fn">
-	            <i class="fa-solid fa-user"></i>
-	        </div>
-	        <div class="input size-normal">
-	            <label for="maidOfHonor-ln">Last name</label>
-	            <input type="text" name="maidOfHonor-ln">
-	        </div>
-    	</div>
-
-		<div class="input-group multi-names">
-			<h3>Groomsmen</h3>
-			<div class="input size-normal">
-				<label for="groomsman1-fn">First name</label>
-				<input type="text" name="groomsman1-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman1-ln">Last name</label>
-				<input type="text" name="groomsman1-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman2-fn">First name</label>
-				<input type="text" name="groomsman2-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman2-ln">Last name</label>
-				<input type="text" name="groomsman2-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman3-fn">First name</label>
-				<input type="text" name="groomsman3-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman3-ln">Last name</label>
-				<input type="text" name="groomsman3-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman4-fn">First name</label>
-				<input type="text" name="groomsman4-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman4-ln">Last name</label>
-				<input type="text" name="groomsman4-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman5-fn">First name</label>
-				<input type="text" name="groomsman5-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman5-ln">Last name</label>
-				<input type="text" name="groomsman5-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman6-fn">First name</label>
-				<input type="text" name="groomsman6-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="groomsman6-ln">Last name</label>
-				<input type="text" name="groomsman6-ln">
-			</div>
-		</div>
-
-
-		<div class="input-group multi-names">
-			<h3>Flower Girl</h3>
-			<div class="input size-normal">
-				<label for="flowerGirl1-fn">First name</label>
-				<input type="text" name="flowerGirl1-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="flowerGirl1-ln">Last name</label>
-				<input type="text" name="flowerGirl1-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="flowerGirl2-fn">First name</label>
-				<input type="text" name="flowerGirl2-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="flowerGirl2-ln">Last name</label>
-				<input type="text" name="flowerGirl2-ln">
-			</div>
-		</div>
-
-		<div class="input-group multi-names">
-			<h3>Ring Bearer</h3>
-			<div class="input size-normal">
-				<label for="ringBearer1-fn">First name</label>
-				<input type="text" name="ringBearer1-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="ringBearer1-ln">Last name</label>
-				<input type="text" name="ringBearer1-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="ringBearer2-fn">First name</label>
-				<input type="text" name="ringBearer2-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="ringBearer2-ln">Last name</label>
-				<input type="text" name="ringBearer2-ln">
-			</div>
-		</div>
-
-
-		<div class="input-group">
-			<h3>Officiant</h3>
-			<div class="input size-normal">
-				<label for="officiant-fn">First name</label>
-				<input type="text" name="officiant-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="officiant-ln">Last name</label>
-				<input type="text" name="officiant-ln">
-			</div>
-		</div>
-
-		<div class="input-group multi-names">
-			<h3>Parents of the Bride</h3>
-			<div class="input size-normal">
-				<label for="parentBride1-fn">First name</label>
-				<input type="text" name="parentBride1-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="parentBride1-ln">Last name</label>
-				<input type="text" name="parentBride1-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="parentBride2-fn">First name</label>
-				<input type="text" name="parentBride2-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="parentBride2-ln">Last name</label>
-				<input type="text" name="parentBride2-ln">
-			</div>
-		</div>
-
-		<div class="input-group multi-names">
-			<h3>Parents of the Groom</h3>
-			<div class="input size-normal">
-				<label for="parentGroom1-fn">First name</label>
-				<input type="text" name="parentGroom1-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="parentGroom1-ln">Last name</label>
-				<input type="text" name="parentGroom1-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="parentGroom2-fn">First name</label>
-				<input type="text" name="parentGroom2-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="parentGroom2-ln">Last name</label>
-				<input type="text" name="parentGroom2-ln">
-			</div>
-		</div>
-
-		<div class="input-group multi-names">
-			<h3>Grandparents</h3>
-			<div class="input size-normal">
-				<label for="grandparent1-fn">First name</label>
-				<input type="text" name="grandparent1-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent1-ln">Last name</label>
-				<input type="text" name="grandparent1-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent2-fn">First name</label>
-				<input type="text" name="grandparent2-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent2-ln">Last name</label>
-				<input type="text" name="grandparent2-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent3-fn">First name</label>
-				<input type="text" name="grandparent3-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent3-ln">Last name</label>
-				<input type="text" name="grandparent3-ln">
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent4-fn">First name</label>
-				<input type="text" name="grandparent4-fn">
-				<i class="fa-solid fa-user"></i>
-			</div>
-			<div class="input size-normal">
-				<label for="grandparent4-ln">Last name</label>
-				<input type="text" name="grandparent4-ln">
-			</div>
-	</div> -->
 		<input class="button-hover" type="submit" name="submit">
 	</form>
 </div>

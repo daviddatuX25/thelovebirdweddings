@@ -9,7 +9,7 @@ form{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 9rem;
+	margin-top: 2rem;
 	flex-wrap: wrap;
 }
 
@@ -18,7 +18,7 @@ form{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 6rem 3rem;
+	padding: 3rem 3rem;
 	flex-wrap: wrap;
 	flex-direction: row;
 }
@@ -30,9 +30,10 @@ form{
 	flex-basis: 100%;
 }
 .input-group h3{
+	margin-top: 6rem;
 	text-align: center;
 	flex-basis: 100%;
-	margin-bottom: 4rem;
+	margin-bottom: 1.5rem;
 }
 
 /* For side by side layout of a Input Group */
@@ -158,8 +159,8 @@ img.partnersIcon{
 		box-shadow:var(--drop-shadow);
 	}
 	/* Submit button */
-	input[type=submit]{
-		padding: 1.5rem 7rem;
+	input[type=submit], .button{
+		padding: 1rem 5rem;
 		background-color: var(--brandColor);
 		border: 0;
 		border-radius: 3rem;
