@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2024 at 08:14 AM
+-- Generation Time: Dec 18, 2024 at 11:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,8 +73,8 @@ CREATE TABLE `participants` (
 --
 
 INSERT INTO `participants` (`participant_id`, `first_name`, `last_name`, `birthday`, `contact_no`, `barangay`, `city`, `province`, `photo`, `gender`) VALUES
-(1, 'Jane', 'Doe', NULL, NULL, NULL, NULL, NULL, 'partner-1/participants/bride/participant1.png', NULL),
-(2, 'John', 'Smith', NULL, NULL, NULL, NULL, NULL, 'partner-1/participants/groom/participant2.png', NULL),
+(1, 'Jane', 'Doe', '0000-00-00', NULL, '', '', '', '', NULL),
+(2, 'John', 'Smith', '0000-00-00', '', '', '', '', 'clients/partner-1/participants/Groom/2_JohnSmith.png', NULL),
 (3, 'Emily', 'Brown', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'David', 'Lee', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 'Sarah', 'Jones', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -124,7 +124,6 @@ INSERT INTO `participants` (`participant_id`, `first_name`, `last_name`, `birthd
 (49, 'Ava', 'Walker', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (50, 'Matthew', 'Hall', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (51, 'Chloe', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(52, 'Christopher', 'Brooks', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (53, 'Abigail', 'Bailey', NULL, NULL, NULL, NULL, NULL, 'partner-3/participants/bride/participant53.png', NULL),
 (54, 'Andrew', 'Rivera', NULL, NULL, NULL, NULL, NULL, 'partner-3/participants/groom/participant54.png', NULL),
 (55, 'Elizabeth', 'Cooper', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -307,7 +306,10 @@ INSERT INTO `participants` (`participant_id`, `first_name`, `last_name`, `birthd
 (232, 'Alexander', 'Allen', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (233, 'Ava', 'Evans', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (234, 'Matthew', 'Sanchez', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(235, 'Chloe', 'Mitchell', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(235, 'Chloe', 'Mitchell', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(236, 'David', 'Sarmiento', '0000-00-00', '', '', '', '', NULL, NULL),
+(237, 'David', 'Sarmiento', '0000-00-00', '', '', '', '', NULL, NULL),
+(238, 'David Datu', 'Sarmiento', '0000-00-00', '', '', '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -383,6 +385,8 @@ INSERT INTO `role_assignments` (`assignment_id`, `wedding_id`, `participant_id`,
 (50, 1, 24, 11),
 (51, 1, 25, 11),
 (52, 1, 26, 11),
+(131, 1, 237, 2),
+(132, 1, 238, 11),
 (53, 2, 27, 12),
 (54, 2, 28, 13),
 (55, 2, 29, 1),
@@ -408,7 +412,6 @@ INSERT INTO `role_assignments` (`assignment_id`, `wedding_id`, `participant_id`,
 (75, 2, 49, 11),
 (76, 2, 50, 11),
 (77, 2, 51, 11),
-(78, 2, 52, 11),
 (79, 3, 53, 12),
 (80, 3, 54, 13),
 (81, 3, 55, 1),
@@ -480,10 +483,8 @@ CREATE TABLE `testimonies` (
 --
 
 INSERT INTO `testimonies` (`testimony_id`, `role_assignment_id`, `comment`, `ratings`) VALUES
-(1, 27, 'Lovebirds Weddings did an amazing job with our beach wedding! Everything was perfect.', 4.5),
 (2, 28, 'We highly recommend Lovebirds Weddings! They made our wedding day stress-free and unforgettable.', 5),
 (3, 29, 'The attention to detail from Lovebirds Weddings was incredible. We couldn\'t have asked for more.', 5),
-(4, 30, 'Lovebirds Weddings exceeded all our expectations. The wedding was truly magical.', 5),
 (5, 31, 'Thank you, Lovebirds Weddings, for making our dream wedding come true!', 4.5),
 (6, 53, 'Lovebirds Weddings planned a beautiful garden wedding for us. We were so impressed!', 5),
 (7, 54, 'We couldn\'t have imagined a more perfect garden wedding. Thanks, Lovebirds Weddings!', 5),
@@ -499,7 +500,12 @@ INSERT INTO `testimonies` (`testimony_id`, `role_assignment_id`, `comment`, `rat
 (17, 106, 'Our chapel wedding was everything we hoped for, thanks to Lovebirds Weddings.', 5),
 (18, 107, 'The service from Lovebirds Weddings was outstanding.', 5),
 (19, 108, 'We highly recommend Lovebirds Weddings for a stress-free and beautiful wedding.', 5),
-(20, 109, 'Lovebirds Weddings made our chapel wedding a truly memorable experience.', 5);
+(20, 109, 'Lovebirds Weddings made our chapel wedding a truly memorable experience.', 5),
+(21, 72, 'Its good broooo!!!', 4.5),
+(22, 61, 'I bake David.', 3.5),
+(23, 60, 'I emily the adams', 5),
+(24, 27, 'I love it too.', 5),
+(25, 32, 'Okayyy!!', 5);
 
 -- --------------------------------------------------------
 
@@ -536,6 +542,7 @@ CREATE TABLE `weddings` (
   `password` varchar(255) NOT NULL,
   `theme_id` int(11) DEFAULT NULL,
   `theme_color` varchar(255) DEFAULT NULL,
+  `couple_photo` text DEFAULT NULL,
   `wedding_location` varchar(255) DEFAULT NULL,
   `wedding_photo` text DEFAULT NULL,
   `prenup_location` varchar(255) DEFAULT NULL,
@@ -548,11 +555,11 @@ CREATE TABLE `weddings` (
 -- Dumping data for table `weddings`
 --
 
-INSERT INTO `weddings` (`wedding_id`, `wedding_date`, `description`, `wedding_key`, `password`, `theme_id`, `theme_color`, `wedding_location`, `wedding_photo`, `prenup_location`, `prenup_photo`, `email_address`, `mobile_number`) VALUES
-(1, '2024-12-12', 'A romantic beach wedding', 'beachWedding2024', 'secret123', 1, '#F5DEB3', 'Beach Resort', 'clients/1/weddingPhoto/beachWedding.jpg', 'Beachfront', 'clients/1/prenupPhoto/beachPrenup.jpg', NULL, ''),
-(2, '2025-03-08', 'A fairytale garden wedding', 'gardenWedding2025', 'secret456', 2, '#4CAF50', 'Garden', 'clients/2/weddingPhoto/gardenWedding.jpg', 'Botanical Garden', 'clients/2/prenupPhoto/gardenPrenup.jpg', NULL, ''),
-(3, '2025-06-21', 'A rustic vineyard wedding', 'vineyardWedding2025', 'secret789', 3, '#D2691E', 'Vineyard', 'clients/3/weddingPhoto/vineyardWedding.jpg', 'Vineyard', 'clients/3/prenupPhoto/vineyardPrenup.jpg', NULL, ''),
-(4, '2025-10-15', 'A classic chapel wedding', 'chapelWedding2025', 'secret000', 4, '#FFFFFF', 'Chapel', 'clients/4/weddingPhoto/chapelWedding.jpg', 'Historic Manor', 'clients/4/prenupPhoto/chapelPrenup.jpg', NULL, '');
+INSERT INTO `weddings` (`wedding_id`, `wedding_date`, `description`, `wedding_key`, `password`, `theme_id`, `theme_color`, `couple_photo`, `wedding_location`, `wedding_photo`, `prenup_location`, `prenup_photo`, `email_address`, `mobile_number`) VALUES
+(1, '2024-12-12', 'A romantic beach wedding indeed.', 'beachWedding2024', 'secret123', 1, '#f5deb3', 'clients/partner-1/couple_images/couple.jpg', 'Beach Resort', 'clients/partner-1/marriage_images/wedding_photo.jpg', 'Beachfront', 'clients/partner-1/prenup_images/prenup_photo.jpg', 'safs@gmail.com', '192389319'),
+(2, '2025-03-08', 'A fairytale garden wedding', 'gardenWedding2025', 'secret456', 2, '#4caf50', 'clients/partner-2/couple_images/couple.png', 'Garden', 'clients/partner-2/marriage_images/marriage.jpg', 'Botanical Garden', 'clients/partner-2/prenup_images/prenup.jpg', 'abc@example.com', '9123819231'),
+(3, '2025-06-21', 'A rustic vineyard wedding', 'vineyardWedding2025', 'secret789', 3, '#D2691E', 'clients/partner-3/couple.png', 'Vineyard', 'clients/partner-3/vineyardWedding.jpg', 'Vineyard', 'clients/partner-3/vineyardPrenup.jpg', NULL, ''),
+(4, '2025-10-15', 'A classic chapel wedding', 'chapelWedding2025', 'secret000', 4, '#ffffff', 'clients/partner-4/couple_images/couple.png', 'Chapel', 'clients/partner-4/marriage_images/marriage.jpg', 'Historic Manor', 'clients/partner-4/prenup_images/prenup.jpg', 'sarmien@gmail.com', '09193913902');
 
 --
 -- Indexes for dumped tables
@@ -619,7 +626,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `participant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
+  MODIFY `participant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -631,13 +638,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_assignments`
 --
 ALTER TABLE `role_assignments`
-  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `assignment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT for table `testimonies`
 --
 ALTER TABLE `testimonies`
-  MODIFY `testimony_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `testimony_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `themes`
@@ -659,9 +666,9 @@ ALTER TABLE `weddings`
 -- Constraints for table `role_assignments`
 --
 ALTER TABLE `role_assignments`
-  ADD CONSTRAINT `role_assignments_ibfk_1` FOREIGN KEY (`wedding_id`) REFERENCES `weddings` (`wedding_id`),
-  ADD CONSTRAINT `role_assignments_ibfk_2` FOREIGN KEY (`participant_id`) REFERENCES `participants` (`participant_id`),
-  ADD CONSTRAINT `role_assignments_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`);
+  ADD CONSTRAINT `role_assignments_ibfk_1` FOREIGN KEY (`wedding_id`) REFERENCES `weddings` (`wedding_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_assignments_ibfk_2` FOREIGN KEY (`participant_id`) REFERENCES `participants` (`participant_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_assignments_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `testimonies`

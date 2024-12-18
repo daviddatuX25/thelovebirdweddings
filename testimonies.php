@@ -18,19 +18,22 @@ if(isset($_POST['wedding_key'])){
     $weddingKeyVerified_input = $weddingsDB->getWeddingByKey($weddingKey);
 	$weddingKeyVerified_refered = $weddingsDB->getWeddingKeyById($weddingId_inputed);
     if ($weddingKeyVerified_input) {
-		if ($weddingKeyVerified_input->wedding_key == $weddingKeyVerified_refered->wedding_id){
+		if ($weddingKeyVerified_input->wedding_key == $weddingKeyVerified_refered->wedding_key){
 			// Store wedding ID in session
 			$_SESSION['wedding_key'] = $weddingKeyVerified_input->wedding_key;
 			$_SESSION['wedding_id'] = $weddingKeyVerified_input->wedding_id;
+			$_SESSION['alertMessage'] = "Welcome wedding member!";
 			header("Location: {$_SERVER['PHP_SELF']}");
 			exit();
 		} else {
-			echo "Incorrect Wedding Key for this Wedding.";
+			$_SESSION['alertMessage'] = "Incorrect Wedding Key for this wedding";
 			header("Location: {$_SERVER['PHP_SELF']}?wedding_id={$_POST['wedding_id']}");
+			exit();
 		}
 	} else {
-		echo "Doesn't match any wedding record";
+		$_SESSION['alertMessage'] = "Wedding key invalid.";
 		header("Location: {$_SERVER['PHP_SELF']}");
+		exit();
 		
 	}
 }
@@ -41,17 +44,30 @@ if(isset($_POST['create_testimony'])){
 	$comment = Sanitizer::test_input($_POST['comment']);
 	$ratings = (float)Sanitizer::test_input($_POST['ratings']);
 	$testimoniesDB->createTestimony($assignment_id, $comment,$ratings);
-	echo "Testimony created";
+	$_SESSION['alertMessage'] = "Testimony added.";
 }
 
 // Form submission Update
 if(isset($_POST['render_testimony'])){
-	$assignment_id = Sanitizer::test_input($_POST['assignment_id']);
-	$testimonyId = (int) $testimoniesDB->getTestimonyIdByRoleAssignments($assignment_id);
+	$assignment_id = (int) Sanitizer::test_input($_POST['assignment_id']);
+	$testimonyId = $testimoniesDB->getTestimonyIdByRoleAssignments($assignment_id);
+	$testimonyId = $testimonyId->testimony_id??NULL;
 	$comment = Sanitizer::test_input($_POST['comment']);
 	$ratings = (float)Sanitizer::test_input($_POST['ratings']);
+	if($testimonyId==NULL){
+		$testimoniesDB->createTestimony($assignment_id, $comment,$ratings);
+        $_SESSION['alertMessage'] = "Testimony created.";
+	} else {
 	$testimoniesDB->updateTestimony($testimonyId, $assignment_id, $comment,$ratings);
-	echo "Testimony Updated";
+		$_SESSION['alertMessage'] = "Testimony updated.";
+	}
+}
+// Form submission Delete
+if(isset($_POST['delete_testimony'])){
+	$assignment_id = Sanitizer::test_input($_POST['assignment_id']);
+	$testimonyId = $testimoniesDB->getTestimonyIdByRoleAssignments($assignment_id)->testimony_id;
+	$testimoniesDB->deleteTestimony($testimonyId);
+	$_SESSION['alertMessage'] = "Testimony deleted.";
 }
 
 

@@ -59,10 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_wedding'])) {
             $coupleImage = $_FILES['couple_image'];
             $coupleImagePath = $coupleImgsFolder . $coupleImage["name"];
             if (!move_uploaded_file($coupleImage['tmp_name'], $coupleImagePath)) {
-                error_log("Failed to move uploaded file for couple image.");
+                $manageWedding_DetailsPage->alertMessage = "Failed to move uploaded file for couple image.";
             }
         } else {
-            error_log("Couple image upload error: " . $_FILES['couple_image']['error']);
+            $manageWedding_DetailsPage->alertMessage = "Couple image upload error: " . $_FILES['couple_image']['error'];
         }
     }
 
@@ -74,9 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_wedding'])) {
             $marriageImagePath = $marriageImgsFolder . $marriageImage["name"];
             if (!move_uploaded_file($marriageImage['tmp_name'], $marriageImagePath)) {
                 error_log("Failed to move uploaded file for marriage image.");
+                $manageWedding_DetailsPage->alertMessage = "Failed to move uploaded file for marriage image.";
             }
         } else {
-            error_log("marriage image upload error: " . $_FILES['marriage_image']['error']);
+            $manageWedding_DetailsPage->alertMessage = "Couple image upload error: " . $_FILES['marriage_image']['error'];
         }
     }
 
@@ -87,10 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_wedding'])) {
             $prenupImage = $_FILES['prenup_image'];
             $prenupImagePath = $prenupImgsFolder . $prenupImage["name"];
             if (!move_uploaded_file($prenupImage['tmp_name'], $prenupImagePath)) {
-                error_log("Failed to move uploaded file for prenup image.");
+                $manageWedding_DetailsPage->alertMessage = "Failed to move uploaded file for prenup image.";
             }
         } else {
-            error_log("prenup image upload error: " . $_FILES['prenup_image']['error']);
+            $manageWedding_DetailsPage->alertMessage = "Couple image upload error: " . $_FILES['prenup_image']['error'];
         }
     }
 
@@ -106,8 +107,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_wedding'])) {
     }
 
     $weddingsDB->updateWedding($_SESSION['wedding_id'], $weddingData);
-    header("Location: manage-wedding.php");
+    $_SESSION['alertMessage'] = "Successfully updated wedding details.";
+    header("Location: {$_SERVER['PHP_SELF']}");
     exit();
+} else {
 }
 
 // Handle delete wedding

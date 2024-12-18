@@ -77,12 +77,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Validate required fields
     if (empty($participantData['first_name']) || empty($participantData['last_name'])) {
-        echo "First name and last name are required.";
+        $_SESSION['alertMessage'] = "First name and last name are required..";
     } else {
         $participantId = $participantsDB->createParticipant($participantData);
         $roleAssignmentDB->createRoleAssignment($weddingID, $participantId, $_POST['role_id']); // Assuming this method exists
+        $_SESSION['alertMessage'] = "Participant added.";
         header("Location: manage-weddingParticipants.php");
         exit();
+        
     }
 }
 

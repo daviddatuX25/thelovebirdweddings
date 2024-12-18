@@ -38,7 +38,6 @@ foreach ($raw_weddingRolesAndParticipants as $participant) {
 }
 $manageWeddingParticipantsPage->weddingRolesAndParticipants = $groupedParticipants;
 
-// Assuming you're processing the form submission
 if (isset($_POST['update_participant'])) {
     $role_name = $_POST['role_name'];
     // Check if participant data has been submitted (update check)
@@ -93,7 +92,19 @@ if (isset($_POST['update_participant'])) {
     }
     // Update the participant's other details (excluding photo for now)
     $participantsDB->updateParticipant($participantId, $updatedData);
-    header("Location: $_SERVER[PHP_SELF]");
+    $_SESSION['alertMessage'] = "Participant details updated.";
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit();
+
 }
+
+// Check if a delete request has been made
+if (isset($_POST['delete_participant'])) {
+    $participantId = (int)Sanitizer::test_input($_POST['delete_participant']); // Get the participant ID from the form
+    $participantsDB->deleteParticipant($participantId); // Call the delete method
+    header("Location: $_SERVER[PHP_SELF]"); // Redirect to the same page to refresh the list
+    exit();
+}
+
 echo $manageWeddingParticipantsPage;
 ?>

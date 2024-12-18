@@ -34,6 +34,11 @@ include 'includes/header.php';?>
         flex-direction: column; 
         margin-bottom: 20rem;
     }
+    .button-grouped{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1.2rem;
+    }
 
     section.main{
         margin-bottom: 2rem;
@@ -56,12 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const selectedTestimony = testimoniesData.find(item => item.assignment_id == selectedId);
 
         if (selectedTestimony) {
-            slider.value = selectedTestimony.ratings || 2.5;
+            slider.value = selectedTestimony.ratings || 5;
             ratingValue.textContent = slider.value;
             commentTextarea.value = selectedTestimony.comment || "";
         } else {
-            slider.value = 2.5;
-            ratingValue.textContent = "2.5";
+            slider.value = 5;
+            ratingValue.textContent = "5";
             commentTextarea.value = "";
         }
     }
@@ -139,9 +144,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <textarea name="comment" id="comment" rows="4" cols="50"></textarea>
         </div>
         <?php if($admin):?>
-            <button type="submit" name="render_testimony">Render Testimony</button>
+            <div class="button-grouped">
+                <button class="button button-hover" type="submit" name="render_testimony">Render</button>
+                <button class="button button-hover" type="submit" name="delete_testimony">Delete</button>
+            </div>
         <?php else:?>
-            <button type="submit" name="create_testimony">Create Testimony</button>
+            <button class="button button-hover" type="submit" name="create_testimony">Create Testimony</button>
         <?php endif;?>
     </div>
     </form>
@@ -156,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="input size-small">
                 <label for="wedding_key">Wedding Key</label>
                 <input id="wedding_key"type="text" name="wedding_key">
+				<i class="fa-solid fa-key"></i>
             </div>
     		<input class="button button-hover" type="submit" name="submit" value="Log in">
         </div>

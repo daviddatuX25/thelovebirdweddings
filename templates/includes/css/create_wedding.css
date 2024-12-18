@@ -154,7 +154,7 @@ img.partnersIcon{
 	}
 	
 	/* Hover/focus animation/shadow */
-	.input input:not([type=radio],[type=color]):focus{
+	.input input:not([type=radio],[type=color],[type=range]):focus{
 		outline: 0;
 		box-shadow:var(--drop-shadow);
 	}

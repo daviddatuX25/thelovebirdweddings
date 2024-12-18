@@ -89,12 +89,12 @@ class Testimonies extends Database {
 
     public function getTestimonyIdByRoleAssignments($assignment_id){
         $this->query("
-        SELECT testimonies.testimony_id 
+        SELECT testimonies.testimony_id
         FROM testimonies INNER JOIN role_assignments ON testimonies.role_assignment_id = role_assignments.assignment_id
         WHERE role_assignments.assignment_id = :assignment_id
         ");
         $this->bind(":assignment_id", $assignment_id);
-        return $this->getResults();
+        return $this->getResult();
     }
     
     

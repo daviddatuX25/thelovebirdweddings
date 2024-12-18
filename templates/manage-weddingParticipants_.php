@@ -8,18 +8,36 @@ main h2{
     text-align:center;
     margin-top: 10rem;
 }
-main .input-group form{
-    width:30%;
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem 0;
 }
+
+.input-group form {
+    flex: 1 1 calc(33.333% - 2rem); /* Three forms per row with spacing */
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 280px; /* Ensures forms don’t shrink too small */
+}
+
 main .input-group form .participant .button{
     margin: 5px auto;
-    width: 20rem;
+    width: 17rem;
     display: block;
     font-size: 2.5rem;
 }
 
 .fixed-button span{
     font-size: 2.75rem;
+}
+.button-grouped{
+    margin-left:1.7rem;
+    display: grid;
+    grid-gap:2rem;
+    grid-template-columns:1fr 1fr;
 }
 </style>
 <main>
@@ -76,7 +94,10 @@ main .input-group form .participant .button{
                 </div>
 
                 <!-- Submit button for updating this specific participant -->
-                <button class="button button-hover" type="submit" name="update_participant" value="<?php echo $participant->participant_id; ?>">Update</button>
+                <div class="button-grouped">
+                    <button class="button button-hover" type="submit" name="update_participant" value="<?php echo $participant->participant_id; ?>">Update</button>
+                    <button class="button button-hover" type="submit" name="delete_participant" value="<?php echo $participant->participant_id; ?>">Delete</button>
+                </div>
             </div>
         </form>
     <?php endforeach; ?>
