@@ -63,11 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($_SESSION["wedding_id"]) && !empty($_SESSION['password'])){
         header("Location: manage-weddingDetails.php");
     } else {
-        endSession();
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $_SESSION['alertMessage'] = "Logged out";
     }
 }
 

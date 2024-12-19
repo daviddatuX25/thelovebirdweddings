@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(isset($testimonies)):
     foreach($testimonies as $testimony):?>
     <div class="review">
-        <img class="review-img" src="clients/<?php echo $testimony->photo;?>" alt="person review">
+        <img class="review-img" src="<?php echo $testimony->photo??"templates\includes\images\profile-icon.png";?>" alt="person review">
         <div class="review-content">
             <p class="review-txt"><?php echo $testimony->comment;?></p>
             <h4 class="name"><?php echo $testimony->first_name . " " . $testimony->last_name;?></h4>

@@ -18,10 +18,7 @@ if (isset($_GET['wedding_id'])) {
 	$weddingEvent->weddingTheme = $themes;
 	$weddingEvent->pageTitle = "View wedding event";
 	$weddingEvent->cssFileName = "couple.css";
-
 	echo $weddingEvent; // Display page
-
-
 } else {
 	header("Location: manage-wedding.php?page=create");
 }

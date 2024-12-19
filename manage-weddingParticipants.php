@@ -71,7 +71,7 @@ if (isset($_POST['update_participant'])) {
         
         // Define a unique name or use a specific format (e.g., participant ID or timestamp)
         $photoExt = pathinfo($photoName, PATHINFO_EXTENSION);
-        $photoFinalName = "{$participantId}_{$firstName}{$lastName}.{$photoExt}";
+        $photoFinalName = "participant_{$participantId}.{$photoExt}";
         
         // Define the directory to store the photo
         $photoDir = "clients/partner-". $weddingID . "/participants/" . $role_name . "/";

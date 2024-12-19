@@ -16,7 +16,11 @@ class Weddings extends Database {
 
     // Read wedding information by ID
     public function getWeddingById($weddingId) {
-        $this->query("SELECT * FROM weddings WHERE wedding_id = :wedding_id");
+        $this->query("
+        SELECT *, themes.theme_name
+        FROM weddings INNER JOIN themes ON weddings.theme_id = themes.theme_id
+        WHERE wedding_id = :wedding_id
+        ");
         $this->bind(":wedding_id", $weddingId);
         return $this->getResult(); // Return the wedding details
     }
