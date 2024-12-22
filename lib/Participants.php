@@ -67,7 +67,6 @@ class Participants extends Database {
     }
 
     // Custom functions ----- :>
-
     public function getWeddingParticipants($weddingId) {
         $this->query("
             SELECT participants.*, roles.role_name 
